@@ -1,25 +1,27 @@
 - name: Create EC2 Instance
   hosts: localhost
   tasks:
-    - ec2:
-        key_name: mykey
+     - ec2:
+        aws_access_key: AKIA3VQOETKKHVBL36FA
+        aws_secret_key: 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
+        key_name: vbk
         instance_type: t2.micro
-        image: ami-05c1fa8df71875112 
+        image: ami-0d5d9d301c853a04a
         wait: yes
-        group: mysecgroup
+        group: Ubuntu
         count: "{{ count }}"
-        vpc_subnet_id: subnet-930a04fb
-        assign_public_ip: yes
+        #vpc_subnet_id: subnet-930a04fb
+        #assign_public_ip: yes
         region: us-east-2
       register: out
-   
+
     - debug:
         msg: "{{out}}"
     - add_host:
         hostname: "{{item.public_ip}}"
         groupname: myservers
         ansible_user: ubuntu
-        ansible_ssh_private_key_file: /aws/mykey.pem
+        ansible_ssh_private_key_file: /root/labs-1/aws/vbk.pem
         ansible_python_interpreter: /usr/bin/python3
       with_items: "{{out.instances}}"
 
