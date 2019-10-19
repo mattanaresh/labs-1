@@ -2,8 +2,8 @@
   hosts: localhost
   tasks:
      - ec2:
-        aws_access_key: AKIA3VQOETKKHVBL36FA
-        aws_secret_key: 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
+        aws_access_key: 
+        aws_secret_key: 
         key_name: vbk
         instance_type: t2.micro
         image: ami-0d5d9d301c853a04a
